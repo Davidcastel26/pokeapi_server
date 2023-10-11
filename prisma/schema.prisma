@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pokemon {
+  idPokemon   String @unique @id
+  typeId      String
+  type        Type @relation(fields: [typeId], references: [idTypes])
+  name        String @unique
+  createdAt   DateTime @default(now())
+  isActive    Boolean @default(true)
+  evolutionTo Evolution[]
+  // types       Type[]
+  // evolution   Evolution @relation(fields: [evolutionId], references: [idEvolution])
+
+  @@index([typeId])
+  @@index([name])
+}
+
+model Type {
+  idTypes       String @unique @id @default(uuid())
+  typeName      String @unique
+  pokemon       Pokemon[]
+  // pokemonid     String
+  // pokemon       Pokemon @relation(fields: [pokemonid], references: [idPokemon])
+  // @@index([pokemonid])
+}
+
+model Evolution {
+  idEvolution   String @unique @id @default(uuid())
+  pokemonId     String
+  pokemon       Pokemon @relation(fields: [pokemonId], references: [name])
+  evoName1      String
+  evoName2      String?
+  evoName3      String?
+
+  @@index([pokemonId])
+}
