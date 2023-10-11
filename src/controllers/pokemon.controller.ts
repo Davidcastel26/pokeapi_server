@@ -48,8 +48,9 @@ export const getAllPokemons = async (
     try {
 
         const allPokemons = await prismadb.pokemon.findMany({
-            where:{
-                isActive: true
+            include:{
+                type: true,
+                evolutionTo:true
             },
             take: limit ? Number(limit): undefined,
             skip: since ? Number(since) : undefined
@@ -76,17 +77,13 @@ export const getOnePokemon = async (
         const getPokemon = await prismadb.pokemon.findUnique({
             where:{
                 idPokemon:idPokemon,
-                isActive: true
             },
             include:{
                 evolutionTo: true
             }
         })
 
-        return res.status(200).json({
-            msg:'get one pokemon',
-            getPokemon
-        })
+        return res.status(200).json(getPokemon)
 
     } catch (error) {
         next(error)
@@ -135,7 +132,7 @@ export const updateStatus = async (
 
 
     const { idPokemon } = req.params;
-    const { isActive } = req.body
+    const { state } = req.body
     try {
 
         const pokemonStatus = await prismadb.pokemon.update({
@@ -143,7 +140,7 @@ export const updateStatus = async (
                 idPokemon
             },
             data:{
-                isActive
+                isActive: state
             }
         })
         

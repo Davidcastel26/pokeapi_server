@@ -8,7 +8,8 @@ import {
     deletePokemon,
     getAllPokemons, 
     getOnePokemon, 
-    updateApokemon} from "../controllers/pokemon.controller";
+    updateApokemon,
+    updateStatus} from "../controllers/pokemon.controller";
 
 const router = Router()
 
@@ -18,9 +19,14 @@ router.get('/savechain', chainsPokemons );
 
 router.get('/', getAllPokemons);
 router.get('/:idPokemon', getOnePokemon);
+
 router.post('/', createPokemon);
+
 router.put('/:idPokemon', updateApokemon);
-router.put('/:idPokemon', deletePokemon);
+
+router.patch('/:idPokemon', updateStatus);
+
+router.delete('/:idPokemon', deletePokemon);
 
 
 export default router;
