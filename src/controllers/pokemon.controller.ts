@@ -154,7 +154,6 @@ export const updateStatus = async (
     }
 }
 
-
 export const deletePokemon = async (
     req: Request,
     res: Response,
