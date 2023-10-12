@@ -28,26 +28,31 @@ export const getPokemons = async(
             const dataByPokemon: Pokemon_Root = getPokemonDetail.data;
             const {id, name, types} = dataByPokemon;
 
-            const typeNames = types.map(e => e.type.name)
+            const pokemonInDBAlrady = await prismadb.pokemon.findFirst({
+                where:{ name, idPokemon: id.toString() },
+            })
 
-            const findTypePokemon = await prismadb.type.findMany({where:{
-                typeName: {
-                    in: typeNames
-                },
-                
-            },select:{idTypes:true}})
-            const typeIds = findTypePokemon.map((type) => type.idTypes);
+           if( !pokemonInDBAlrady ) {
+                const typeNames = types.map(e => e.type.name)
 
-            if( findTypePokemon ){
-
-                await prismadb.pokemon.create({
-                    data:{
-                        idPokemon:id.toString(),
-                        name: name,
-                        typeId: typeIds[0]
+                const findTypePokemon = await prismadb.type.findMany({where:{
+                    typeName: {
+                        in: typeNames
                     },
-                })
-            }
+                    
+                },select:{idTypes:true}})
+                const typeIds = findTypePokemon.map((type) => type.idTypes);
+                
+                if( findTypePokemon ){
+                    await prismadb.pokemon.create({
+                        data:{
+                            idPokemon:id.toString(),
+                            name: name,
+                            typeId: typeIds[0]
+                        },
+                    })
+                }
+           }
         }
 
         res.json({msg: 'looking'})
