@@ -26,3 +26,29 @@ export const getTypes = async (
     }
 
 }
+export const getTypesById = async (
+    req: Request,
+    res: Response,
+    next:NextFunction
+) => {
+
+    const { idTypes } = req.params;
+
+    try {
+        
+        const getPokemon = await prismadb.type.findUnique({
+            where:{
+                idTypes:idTypes,
+            },
+            include:{
+                pokemon:true
+            }
+        })
+
+        return res.status(200).json(getPokemon)
+
+    } catch (error) {
+        next(error)
+    }
+
+}
