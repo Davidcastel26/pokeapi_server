@@ -10,22 +10,28 @@ export const createPokemon = async (
 ) => {
     
     const { name, typeId }:Pokemon_Base = req.body;
-
+    console.log( req.body)
     try {
         
         const id = uuidv4();
-
+        console.log('TYPEID BODY --------------' + typeId)
         const postPokemon:Pokemon_Base={
             idPokemon: id,
             name,
             typeId
         }
 
+        const type = await prismadb.type.findUnique({
+            where:{
+                idTypes: typeId
+            }
+        })
+        console.log('esto es --------------' + type)
         await prismadb.pokemon.create({
             data:{
                 idPokemon: postPokemon.idPokemon,
                 name: postPokemon.name,
-                typeId: postPokemon.typeId
+                typeId: type.idTypes
             }
         })
 
@@ -209,6 +215,7 @@ export const searchPokemons = async (
                 ]
             },
             include:{
+                type: true,
                 evolutionTo: true
             }
         })

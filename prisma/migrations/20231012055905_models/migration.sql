@@ -56,4 +56,4 @@ CREATE INDEX "Evolution_pokemonId_idx" ON "Evolution"("pokemonId");
 ALTER TABLE "Pokemon" ADD CONSTRAINT "Pokemon_typeId_fkey" FOREIGN KEY ("typeId") REFERENCES "Type"("idTypes") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Evolution" ADD CONSTRAINT "Evolution_pokemonId_fkey" FOREIGN KEY ("pokemonId") REFERENCES "Pokemon"("name") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Evolution" ADD CONSTRAINT "Evolution_pokemonId_fkey" FOREIGN KEY ("pokemonId") REFERENCES "Pokemon"("name") ON DELETE CASCADE ON UPDATE CASCADE;
