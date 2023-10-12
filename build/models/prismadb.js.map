@@ -1,0 +1,1 @@
+{"version":3,"file":"prismadb.js","sourceRoot":"","sources":["../../src/models/prismadb.ts"],"names":[],"mappings":";;AAAA,2CAA8C;AAM9C,MAAM,QAAQ,GAAG,UAAU,CAAC,MAAM,IAAI,IAAI,qBAAY,EAAE,CAAC;AAEzD,IAAI,OAAO,CAAC,GAAG,CAAC,QAAQ,KAAK,YAAY;IAAE,UAAU,CAAC,MAAM,GAAG,QAAQ,CAAC;AAExE,kBAAe,QAAQ,CAAC"}

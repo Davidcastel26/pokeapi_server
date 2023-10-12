@@ -1,11 +1,16 @@
 {
     "compilerOptions": {
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
+        "target": "ES2016",
+        "lib":["ES5","ES6","DOM"],
+        "module": "CommonJS",
+        "moduleResolution": "Node",
         "baseUrl": "src",
-        "outDir": "dist",
+        "outDir": "./build",
         "sourceMap": true,
         "noImplicitAny": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules"]

@@ -7,9 +7,9 @@ import { Evolution_Root } from "typeScript/interfaces/chainEvo";
 import prismadb from "../models/prismadb";
 dotenv.config();
 
-const apilinkPokemon = process.env.URL_POKEMON_API;
-const apilinkType = process.env.URL_POKETYPE_;
-const apiChainPoke = process.env.URL_POKE_CHAIN;
+const apilinkPokemon = process.env.URL_POKEMON_API || 'default';
+const apilinkType = process.env.URL_POKETYPE_ || 'default';
+const apiChainPoke = process.env.URL_POKE_CHAIN || 'default';
 
 export const getPokemons = async(
     req: Request,

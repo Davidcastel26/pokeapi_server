@@ -25,6 +25,7 @@ export const createPokemon = async (
                 idTypes: typeId
             }
         })
+        if( type !== null){
         await prismadb.pokemon.create({
             data:{
                 idPokemon: postPokemon.idPokemon,
@@ -32,7 +33,7 @@ export const createPokemon = async (
                 typeId: type.idTypes
             }
         })
-
+        }
         res.status(201).json(postPokemon)
 
     } catch (error) {
