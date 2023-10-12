@@ -14,7 +14,6 @@ export const createPokemon = async (
     try {
         
         const id = uuidv4();
-        console.log('TYPEID BODY --------------' + typeId)
         const postPokemon:Pokemon_Base={
             idPokemon: id,
             name,
@@ -26,7 +25,6 @@ export const createPokemon = async (
                 idTypes: typeId
             }
         })
-        console.log('esto es --------------' + type)
         await prismadb.pokemon.create({
             data:{
                 idPokemon: postPokemon.idPokemon,
