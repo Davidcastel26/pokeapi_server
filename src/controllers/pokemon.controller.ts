@@ -161,16 +161,61 @@ export const deletePokemon = async (
 
     try {
         
-        const pokemonDelete = await prismadb.pokemon.delete({
+        await prismadb.evolution.deleteMany({
             where:{
-                idPokemon
-            }
+                pokemonId:idPokemon
+            },
+            
         })
 
-        res.status(204).json(pokemonDelete)
+        const deletePokemon = await prismadb.pokemon.delete({
+            where:{
+                idPokemon:idPokemon
+            },
+        })
+
+        res.status(204).json(deletePokemon)
 
     } catch (error) {
         next(error)
     }
 
+}
+
+export const searchPokemons = async (
+    req: Request,
+    res: Response,
+    next:NextFunction
+) => {
+
+    const { searchParam } = req.body;
+
+    try {
+        
+        const results = await prismadb.pokemon.findMany({
+            where:{
+                OR: [
+                    {
+                        name: {
+                            contains:searchParam
+                            // like:
+                        }
+                    }, {
+                        idPokemon: {
+
+                            equals:searchParam
+                        }
+                    }
+                ]
+            },
+            include:{
+                evolutionTo: true
+            }
+        })
+
+        return res.status(200).json(results)
+
+    } catch (error) {
+        next(error)
+    }
 }

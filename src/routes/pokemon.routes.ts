@@ -8,6 +8,7 @@ import {
     deletePokemon,
     getAllPokemons, 
     getOnePokemon, 
+    searchPokemons, 
     updateApokemon,
     updateStatus} from "../controllers/pokemon.controller";
 
@@ -21,6 +22,7 @@ router.get('/', getAllPokemons);
 router.get('/:idPokemon', getOnePokemon);
 
 router.post('/', createPokemon);
+router.post('/search', searchPokemons);
 
 router.put('/:idPokemon', updateApokemon);
 

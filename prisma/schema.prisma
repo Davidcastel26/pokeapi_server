@@ -37,7 +37,7 @@ model Type {
 model Evolution {
   idEvolution   String @unique @id @default(uuid())
   pokemonId     String
-  pokemon       Pokemon @relation(fields: [pokemonId], references: [name])
+  pokemon       Pokemon @relation(fields: [pokemonId], references: [name], onDelete: Cascade)
   evoName1      String
   evoName2      String?
   evoName3      String?
