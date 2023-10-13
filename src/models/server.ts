@@ -6,7 +6,7 @@ import { pokemonsRouter, typesRouter } from "../routes";
 
 dotenv.config();
 
-const port = process.env.PORT || '8080';
+const port = process.env.PORT || '8448';
 export const app: Express = express()
 
 app.use( cors() )
